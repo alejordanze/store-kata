@@ -25,20 +25,28 @@ public class OrderItem {
 		float totalItem = 0;
 		float itemAmount = getProduct().getUnitPrice() * getQuantity();
 		
-		if (getProduct().getCategory() == ProductCategory.Accessories) {
+		if (isAccesory())
 			totalItem = getAccesoriesDisccount(itemAmount);
-		}
 		
-		if (getProduct().getCategory() == ProductCategory.Bikes) {
-			// 20% discount for Bikes
+		if (isBike())
 			totalItem = getBikeDisccount(itemAmount);
-		}
 		
-		if (getProduct().getCategory() == ProductCategory.Cloathing) {
+		if (isCloathing())
 			totalItem = getClothingDisccount(itemAmount);
-		}
 		
 		return totalItem;
+	}
+
+	private boolean isCloathing() {
+		return getProduct().getCategory() == ProductCategory.Cloathing;
+	}
+
+	private boolean isBike() {
+		return getProduct().getCategory() == ProductCategory.Bikes;
+	}
+
+	private boolean isAccesory() {
+		return getProduct().getCategory() == ProductCategory.Accessories;
 	}
 	
 	private float getClothingDisccount(float itemAmount) {
