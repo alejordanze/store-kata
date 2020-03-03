@@ -22,14 +22,16 @@ public class OrderItem {
 	}
 	
 	public float calculateTotal() {
-		float totalItem=0;
+		float totalItem = 0;
+		
+		totalItem = getTotalAmount();
 		
 		if (getProductCategory() == ProductCategory.Accessories)
-			totalItem = getTotalAmount() - getDiscountForBook();
+			 totalItem -= getDiscountForBook();
 		if (getProductCategory() == ProductCategory.Bikes)
-			totalItem = getTotalAmount() - getDiscountForBike();
+			totalItem -= getDiscountForBike();
 		if (getProductCategory() == ProductCategory.Cloathing)
-			totalItem = getTotalAmount() - getCloathingDiscount();
+			totalItem -= getCloathingDiscount();
 		
 		return totalItem;
 	}
