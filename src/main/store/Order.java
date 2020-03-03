@@ -53,11 +53,7 @@ public class Order {
 	}
 
 	public float total() {
-		float totalItems = 0;
-		for (OrderItem item : items) {
-			float totalItem = item.calculateTotal();
-			totalItems += totalItem;
-		}
+		float totalItems = calculateForItems();
 
 		if (this.deliveryCountry == "USA"){
 			// total=totalItems + tax + 0 shipping
@@ -66,6 +62,15 @@ public class Order {
 
 		// total=totalItemst + tax + 15 shipping
 		return totalItems + calculateTax(totalItems) + 15;
+	}
+
+	private float calculateForItems() {
+		float totalItems = 0;
+		for (OrderItem item : items) {
+			float totalItem = item.calculateTotal();
+			totalItems += totalItem;
+		}
+		return totalItems;
 	}
 
 	private float calculateTax(float totalItems) {
