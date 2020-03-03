@@ -61,16 +61,21 @@ public class Order {
 
 		if (this.deliveryCountry == "USA"){
 			// total=totalItems + tax + 0 shipping
-			return totalItems + totalItems * 5 / 100;
+			return totalItems + calculateTax(totalItems);
 		}
 
 		// total=totalItemst + tax + 15 shipping
-		return totalItems + totalItems * 5 / 100 + 15;
+		return totalItems + calculateTax(totalItems) + 15;
+	}
+
+	private float calculateTax(float totalItems) {
+		return totalItems * 5 / 100;
 	}
 
 	private float calculateTotalOf(OrderItem item) {
 		float totalItem = 0;
 		float itemAmount = item.getProduct().getUnitPrice() * item.getQuantity();
+		
 		if (item.getProduct().getCategory() == ProductCategory.Accessories) {
 			float booksDiscount = 0;
 			if (itemAmount >= 100) {
@@ -89,6 +94,7 @@ public class Order {
 			}
 			totalItem = itemAmount - cloathingDiscount;
 		}
+		
 		return totalItem;
 	}
 }
