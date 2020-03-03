@@ -70,25 +70,28 @@ public class Order {
 
 	private float calculateFor(OrderItem item) {
 		float totalItem=0;
-		float itemAmount = item.getProduct().getUnitPrice() * item.getQuantity();
 		if (item.getProduct().getCategory() == ProductCategory.Accessories) {
 			float booksDiscount = 0;
-			if (itemAmount >= 100) {
-				booksDiscount = itemAmount * 10 / 100;
+			if (item.getProduct().getUnitPrice() * item.getQuantity() >= 100) {
+				booksDiscount = getAmountOf(item) * 10 / 100;
 			}
-			totalItem = itemAmount - booksDiscount;
+			totalItem = getAmountOf(item) - booksDiscount;
 		}
 		if (item.getProduct().getCategory() == ProductCategory.Bikes) {
 			// 20% discount for Bikes
-			totalItem = itemAmount - itemAmount * 20 / 100;
+			totalItem = getAmountOf(item) - getAmountOf(item) * 20 / 100;
 		}
 		if (item.getProduct().getCategory() == ProductCategory.Cloathing) {
 			float cloathingDiscount = 0;
 			if (item.getQuantity() > 2) {
 				cloathingDiscount = item.getProduct().getUnitPrice();
 			}
-			totalItem = itemAmount - cloathingDiscount;
+			totalItem = getAmountOf(item) - cloathingDiscount;
 		}
 		return totalItem;
+	}
+
+	private float getAmountOf(OrderItem item) {
+		return item.getProduct().getUnitPrice() * item.getQuantity();
 	}
 }
