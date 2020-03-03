@@ -58,14 +58,17 @@ public class Order {
 			float totalItem = item.calculateTotal();
 			totalItems += totalItem;
 		}
-
 		if (this.deliveryCountry == "USA"){
 			// total=totalItems + tax + 0 shipping
-			return totalItems + calculateTax(totalItems);
+			return calculateTotal(totalItems);
 		}
 
 		// total=totalItemst + tax + 15 shipping
-		return totalItems + calculateTax(totalItems) + 15;
+		return calculateTotal(totalItems) + 15;
+	}
+
+	private float calculateTotal(float totalItems) {
+		return totalItems + calculateTax(totalItems);
 	}
 
 	private float calculateTax(float totalItems) {
