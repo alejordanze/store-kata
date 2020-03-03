@@ -23,17 +23,19 @@ public class OrderItem {
 	
 	public float calculateTotal() {
 		float totalItem=0;
-		if (getProduct().getCategory() == ProductCategory.Accessories) {
+		
+		if (getProductCategory() == ProductCategory.Accessories)
 			totalItem = getTotalAmount() - getDiscountForBook();
-		}
-		if (getProduct().getCategory() == ProductCategory.Bikes) {
-			// 20% discount for Bikes
+		if (getProductCategory() == ProductCategory.Bikes)
 			totalItem = getTotalAmount() - getDiscountForBike();
-		}
-		if (getProduct().getCategory() == ProductCategory.Cloathing) {
+		if (getProductCategory() == ProductCategory.Cloathing)
 			totalItem = getTotalAmount() - getCloathingDiscount();
-		}
+		
 		return totalItem;
+	}
+
+	private ProductCategory getProductCategory() {
+		return getProduct().getCategory();
 	}
 
 	private float getCloathingDiscount() {
