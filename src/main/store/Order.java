@@ -54,7 +54,6 @@ public class Order {
 
 	public float total() {
 		float totalItems = calculateForItems();
-
 		float tax = calculateTax(totalItems);
 		float shipping = calculateShipping();
 		return totalItems + tax + shipping;

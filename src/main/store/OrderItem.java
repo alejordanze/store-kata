@@ -26,13 +26,13 @@ public class OrderItem {
 		float itemAmount = getProduct().getUnitPrice() * getQuantity();
 		
 		if (isAccesory())
-			totalItem = getAccesoriesDisccount(itemAmount);
+			totalItem = getAccesoriesDiscount(itemAmount);
 		
 		if (isBike())
-			totalItem = getBikeDisccount(itemAmount);
+			totalItem = getBikeDiscount(itemAmount);
 		
 		if (isCloathing())
-			totalItem = getClothingDisccount(itemAmount);
+			totalItem = getClothingDiscount(itemAmount);
 		
 		return totalItem;
 	}
@@ -49,7 +49,7 @@ public class OrderItem {
 		return getProduct().getCategory() == ProductCategory.Accessories;
 	}
 	
-	private float getClothingDisccount(float itemAmount) {
+	private float getClothingDiscount(float itemAmount) {
 		float totalItem;
 		float cloathingDiscount = 0;
 		if (getQuantity() > 2) {
@@ -59,13 +59,13 @@ public class OrderItem {
 		return totalItem;
 	}
 
-	private float getBikeDisccount(float itemAmount) {
+	private float getBikeDiscount(float itemAmount) {
 		float totalItem;
 		totalItem = itemAmount - itemAmount * 20 / 100;
 		return totalItem;
 	}
 
-	private float getAccesoriesDisccount(float itemAmount) {
+	private float getAccesoriesDiscount(float itemAmount) {
 		float totalItem;
 		float booksDiscount = 0;
 		if (itemAmount >= 100) {
