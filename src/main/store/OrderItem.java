@@ -24,8 +24,14 @@ public class OrderItem {
 	public float calculateTotal() {
 		float totalItem = 0;
 		float itemAmount = getAmount();
-		
+		Discount discount = createDiscount();
+		totalItem = itemAmount - discount.getDiscount(this);
+		return totalItem;
+	}
+
+	private Discount createDiscount() {
 		Discount discount = null;
+		
 		if (isAccesory())
 			discount = new AccessoryDiscount();
 		
@@ -34,10 +40,7 @@ public class OrderItem {
 		
 		if (isCloathing())
 			discount = new ClothingDiscount();
-		
-		totalItem = itemAmount - discount.getDiscount(this);
-		
-		return totalItem;
+		return discount;
 	}
 
 	public float getAmount() {
