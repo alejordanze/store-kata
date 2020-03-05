@@ -23,18 +23,25 @@ public class OrderItem {
 	
 	public float calculateTotal() {
 		float totalItem = 0;
-		float itemAmount = getProduct().getUnitPrice() * getQuantity();
+		float itemAmount = getAmount();
 		
+		Discount discount = null;
 		if (isAccesory())
-			totalItem = getAccesoriesDiscount(itemAmount);
+			discount = new AccessoryDiscount();
 		
 		if (isBike())
-			totalItem = getBikeDiscount(itemAmount);
+			discount = new BikeDiscount();
 		
 		if (isCloathing())
-			totalItem = getClothingDiscount(itemAmount);
+			discount = new ClothingDiscount();
+		
+		totalItem = itemAmount - discount.getDiscount(this);
 		
 		return totalItem;
+	}
+
+	public float getAmount() {
+		return getProduct().getUnitPrice() * getQuantity();
 	}
 
 	private boolean isCloathing() {

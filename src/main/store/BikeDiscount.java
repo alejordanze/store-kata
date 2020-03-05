@@ -5,7 +5,7 @@ public class BikeDiscount implements Discount {
 	
 	public float getDiscount(OrderItem item) {
 		
-		return item.calculateTotal() * 20 / 100;
+		return item.getAmount() * 20 / 100;
 	}
 	
 }
