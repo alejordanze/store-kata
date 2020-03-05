@@ -22,11 +22,9 @@ public class OrderItem {
 	}
 	
 	public float calculateTotal() {
-		float totalItem = 0;
 		float itemAmount = getAmount();
 		Discount discount = createDiscount();
-		totalItem = itemAmount - discount.getDiscount(this);
-		return totalItem;
+		return itemAmount - discount.getDiscount(this);
 	}
 
 	private Discount createDiscount() {
